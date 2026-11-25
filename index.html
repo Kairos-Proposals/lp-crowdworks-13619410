@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kairos Proposal | 合同会社聖 様 クラウドファンディングLP制作</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1C2B46;
+    --navy-deep:#11192B;
+    --paper:#EEF1F0;
+    --orange:#FF6B45;
+    --green:#1A9E78;
+    --gold:#F0B429;
+    --ink:#1A1F2B;
+    --line: rgba(28,43,70,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans JP", sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.en{
+    font-family:"Zen Kaku Gothic New","Space Grotesk",sans-serif;
+  }
+  .num, .tag, .badge-en{
+    font-family:"Space Grotesk", sans-serif;
+  }
+  a{color:inherit;}
+  img{max-width:100%;}
+
+  /* ===== 背景パターン（経線・地図っぽいライン） ===== */
+  .meridian-bg{
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 70px),
+      repeating-linear-gradient(25deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 90px);
+    pointer-events:none;
+  }
+
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px;}
+
+  /* ===== ピルタグ（言語変換イメージ） ===== */
+  .lang-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; letter-spacing:.08em;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.3);
+    color:#fff;
+    padding:6px 14px; border-radius:999px;
+    font-family:"Space Grotesk",sans-serif;
+  }
+  .lang-pill .arrow{color:var(--gold); font-weight:700;}
+  .lang-pill.light{
+    background:#fff; border:1px solid var(--line); color:var(--navy);
+  }
+  .lang-pill.light .arrow{color:var(--orange);}
+
+  /* ===== HERO ===== */
+  header.hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, #203257 100%);
+    color:#fff;
+    padding:90px 0 120px;
+  }
+  .kairos-mark{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:13px; letter-spacing:.2em;
+    color:rgba(255,255,255,.75);
+    margin-bottom:46px;
+  }
+  .kairos-mark span.dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--orange);
+    box-shadow:0 0 0 4px rgba(255,107,69,0.25);
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(30px, 4.6vw, 54px);
+    font-weight:900;
+    line-height:1.45;
+    letter-spacing:.01em;
+  }
+  .hero h1 .accent{
+    color:var(--orange);
+  }
+  .hero-sub{
+    margin-top:26px;
+    font-size:15px;
+    color:rgba(255,255,255,.78);
+    max-width:520px;
+  }
+  .hero-tags{margin-top:30px; display:flex; flex-wrap:wrap; gap:10px;}
+
+  /* 達成率カードっぽいビジュアル */
+  .progress-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:18px;
+    padding:26px;
+    backdrop-filter:blur(4px);
+  }
+  .progress-card .label{
+    font-size:12px; letter-spacing:.1em; color:rgba(255,255,255,.6);
+    text-transform:uppercase;
+  }
+  .progress-card .percent{
+    font-size:48px; font-weight:700; color:#fff; margin-top:6px;
+    font-family:"Space Grotesk",sans-serif;
+  }
+  .progress-card .percent span{color:var(--gold); font-size:22px; margin-left:4px;}
+  .bar-track{
+    margin-top:16px; height:10px; border-radius:999px;
+    background:rgba(255,255,255,0.14); overflow:hidden;
+  }
+  .bar-fill{
+    height:100%; border-radius:999px; width:86%;
+    background:linear-gradient(90deg, var(--orange), var(--gold));
+  }
+  .progress-card .meta{
+    display:flex; justify-content:space-between;
+    margin-top:14px; font-size:12px; color:rgba(255,255,255,.65);
+  }
+
+  section{position:relative; padding:96px 0;}
+  .section-head{max-width:680px; margin-bottom:54px;}
+  .eyebrow{
+    display:inline-block;
+    font-size:12px; letter-spacing:.18em;
+    color:var(--orange); font-weight:700;
+    margin-bottom:14px;
+    font-family:"Space Grotesk",sans-serif;
+  }
+  .section-head h2{
+    font-size:clamp(24px,3.4vw,36px);
+    font-weight:900;
+    color:var(--navy-deep);
+    line-height:1.5;
+  }
+  .section-head p{
+    margin-top:18px; color:#4A5366; font-size:15px;
+  }
+
+  /* ===== 理解セクション ===== */
+  .understand{
+    background:#fff;
+  }
+  .understand-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0;
+    border:1px solid var(--line); border-radius:20px; overflow:hidden;
+  }
+  .understand-grid .cell{
+    padding:34px 28px; border-right:1px solid var(--line);
+    background:#fff;
+  }
+  .understand-grid .cell:last-child{border-right:none;}
+  .understand-grid .cell .num{
+    font-size:13px; color:var(--orange); font-weight:700; letter-spacing:.1em;
+  }
+  .understand-grid .cell h3{
+    margin-top:12px; font-size:17px; font-weight:700; color:var(--navy-deep);
+  }
+  .understand-grid .cell p{
+    margin-top:12px; font-size:13.5px; color:#555; line-height:1.9;
+  }
+  .quote-box{
+    margin-top:46px;
+    border-left:4px solid var(--orange);
+    padding:22px 28px;
+    background:#F8F4EC00;
+    background:linear-gradient(90deg, rgba(255,107,69,0.06), transparent);
+    font-size:15.5px; color:var(--navy-deep); font-weight:500;
+  }
+
+  /* ===== 価値セクション ===== */
+  .value{
+    background:var(--navy-deep);
+    color:#fff;
+  }
+  .value .section-head h2{color:#fff;}
+  .value .section-head p{color:rgba(255,255,255,.65);}
+  .value-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  }
+  .value-card{
+    background:rgba(255,255,255,0.045);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;
+    padding:30px 26px;
+    position:relative;
+    transition:.25s;
+  }
+  .value-card:hover{
+    background:rgba(255,255,255,0.08);
+    transform:translateY(-4px);
+  }
+  .value-card .idx{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:13px; color:var(--gold); letter-spacing:.1em;
+  }
+  .value-card h3{
+    margin-top:14px; font-size:18px; font-weight:700;
+  }
+  .value-card p{
+    margin-top:12px; font-size:13.5px; color:rgba(255,255,255,.68);
+  }
+  .value-card .ribbon{
+    position:absolute; top:22px; right:22px;
+    width:8px; height:8px; border-radius:50%;
+  }
+
+  /* ===== 進め方 ===== */
+  .process{background:var(--paper);}
+  .timeline{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  .tl-step{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:28px 22px; position:relative;
+  }
+  .tl-step .step-no{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:14px;
+    margin-bottom:16px;
+  }
+  .tl-step h3{font-size:15.5px; font-weight:700; color:var(--navy-deep);}
+  .tl-step p{margin-top:10px; font-size:12.8px; color:#555;}
+  .tl-step .day{
+    margin-top:14px; display:inline-block;
+    font-size:11px; color:var(--orange); font-weight:700;
+    font-family:"Space Grotesk",sans-serif; letter-spacing:.06em;
+  }
+  .tl-connector{
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ===== クロージング ===== */
+  .closing{
+    background:linear-gradient(135deg, var(--navy) 0%, #2B4C7E 55%, #1A9E78 150%);
+    color:#fff;
+    text-align:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .closing h2{
+    font-size:clamp(24px,3.6vw,38px);
+    font-weight:900;
+    max-width:720px; margin:0 auto;
+    line-height:1.6;
+  }
+  .closing p.lead{
+    margin-top:20px; color:rgba(255,255,255,.82);
+    max-width:560px; margin-left:auto; margin-right:auto;
+    font-size:14.5px;
+  }
+  .cta-btn{
+    display:inline-flex; align-items:center; gap:10px;
+    margin-top:38px;
+    background:#fff; color:var(--navy-deep);
+    padding:17px 36px; border-radius:999px;
+    font-weight:700; font-size:15px;
+    text-decoration:none;
+    box-shadow:0 14px 30px rgba(0,0,0,0.25);
+  }
+  .cta-btn .arrow{color:var(--orange); font-size:18px;}
+  .closing-meta{
+    margin-top:56px;
+    display:flex; justify-content:center; gap:40px;
+    flex-wrap:wrap;
+    font-size:12.5px; color:rgba(255,255,255,.65);
+  }
+  .closing-meta b{display:block; color:#fff; font-size:20px; font-family:"Space Grotesk",sans-serif; margin-bottom:4px;}
+
+  footer{
+    background:var(--navy-deep); color:rgba(255,255,255,.4);
+    text-align:center; padding:26px; font-size:12px;
+  }
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .understand-grid{grid-template-columns:1fr;}
+    .understand-grid .cell{border-right:none; border-bottom:1px solid var(--line);}
+    .value-grid{grid-template-columns:1fr 1fr;}
+    .timeline{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .value-grid{grid-template-columns:1fr;}
+    .timeline{grid-template-columns:1fr;}
+    section{padding:70px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="meridian-bg"></div>
+  <div class="wrap">
+    <div class="kairos-mark"><span class="dot"></span>PROPOSAL FROM KAIROS — 合同会社聖 様へのご提案</div>
+    <div class="hero-grid">
+      <div>
+        <h1>世界の発明を、<br>日本の<span class="accent">「欲しい」</span>へ<br>翻訳する。</h1>
+        <p class="hero-sub">
+          海外メーカーの素材を、日本の支援者の心に届くビジュアルへ。
+          構成とコピーはそちらにお任せし、Kairosは「伝わるデザイン」の部分で
+          貴社のクラウドファンディング事業に伴走します。
+        </p>
+        <div class="hero-tags">
+          <span class="lang-pill">EN <span class="arrow">→</span> JP</span>
+          <span class="lang-pill">CN <span class="arrow">→</span> JP</span>
+          <span class="lang-pill">素材 <span class="arrow">→</span> 訴求デザイン</span>
+        </div>
+      </div>
+      <div class="progress-card">
+        <div class="label">Supporting Achievement</div>
+        <div class="percent">186<span>%</span></div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="meta">
+          <span>目標達成イメージ</span>
+          <span>残り 12 日</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="understand">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">UNDERSTANDING THE PROJECT</span>
+      <h2>これは「ゼロから考える仕事」ではなく、<br>「伝える精度を上げる仕事」だと理解しています。</h2>
+      <p>
+        貴社はすでに構成・コピー・素材をお持ちです。今回求められているのは企画力ではなく、
+        海外素材を日本語化し、訴求意図を汲み取って「購入の決め手」となる画像に仕上げる実務力。
+        そのうえで継続的に案件数をこなせる、安定したパートナーだと受け止めています。
+      </p>
+    </div>
+
+    <div class="understand-grid">
+      <div class="cell">
+        <div class="num">01 / LOCALIZE</div>
+        <h3>海外画像の日本語化</h3>
+        <p>英語・中国語表記の文字抜き、フォント再配置、レイアウトの再構成まで一貫して対応する前提で設計します。</p>
+      </div>
+      <div class="cell">
+        <div class="num">02 / VOLUME</div>
+        <h3>20〜25枚規模への対応</h3>
+        <p>サムネイル、見出し、ベネフィット訴求、リターン画像まで、点ではなく「1本のLPの世界観」として統一します。</p>
+      </div>
+      <div class="cell">
+        <div class="num">03 / CONTINUITY</div>
+        <h3>単発ではなく継続前提</h3>
+        <p>商品ごとにテイストは変わっても、連絡の速さ・納期遵守・修正対応の質は一定に保ち続けます。</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      「美しいだけでなく、支援につながるデザインを」——この優先順位を、
+      制作のすべての判断軸に置きます。
+    </div>
+  </div>
+</section>
+
+<section class="value">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">WHAT KAIROS CAN DO</span>
+      <h2>Kairosが提供できる5つの価値</h2>
+      <p>構成・コピーをお任せいただく分、デザインの実行力と提案力で貢献します。</p>
+    </div>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="ribbon" style="background:var(--orange);"></div>
+        <div class="idx">VALUE / 01</div>
+        <h3>素材の完全ローカライズ</h3>
+        <p>海外メーカー提供の画像・動画から文字を抜き、日本語の見出し・キャッチコピーを違和感なく再配置します。</p>
+      </div>
+      <div class="value-card">
+        <div class="ribbon" style="background:var(--green);"></div>
+        <div class="idx">VALUE / 02</div>
+        <h3>CVRを意識した構成デザイン</h3>
+        <p>決められた構成の中でも、視線誘導・余白・強弱設計で「読まれて支援される」順序を作ります。</p>
+      </div>
+      <div class="value-card">
+        <div class="ribbon" style="background:var(--gold);"></div>
+        <div class="idx">VALUE / 03</div>
+        <h3>サムネイル・リターン画像設計</h3>
+        <p>一覧で埋もれない一枚目と、支援を後押しするリターンプラン画像をセットで最適化します。</p>
+      </div>
+      <div class="value-card">
+        <div class="ribbon" style="background:var(--orange);"></div>
+        <div class="idx">VALUE / 04</div>
+        <h3>GIF編集・動画内テロップ対応</h3>
+        <p>静止画だけでなく、GIFや動画素材への文字入れ・編集にも対応し、表現の幅を落としません。</p>
+      </div>
+      <div class="value-card">
+        <div class="ribbon" style="background:var(--green);"></div>
+        <div class="idx">VALUE / 05</div>
+        <h3>長期前提の制作体制</h3>
+        <p>商品ジャンルが変わっても対応できる柔軟性と、継続発注に耐える安定した品質・納期管理を維持します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">HOW WE WORK</span>
+      <h2>進め方のイメージ</h2>
+      <p>まずは小さく、1案件単位でご一緒させてください。相性を確認しながら継続化していきます。</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="step-no">01</div>
+        <h3>素材・構成の共有</h3>
+        <p>構成案、コピー、画像・動画素材、訴求ポイントをご共有いただきます。</p>
+        <span class="day">Day 1</span>
+      </div>
+      <div class="tl-step">
+        <div class="step-no">02</div>
+        <h3>方向性のすり合わせ</h3>
+        <p>ターゲット層・テイストを確認し、必要あればデザイン面の改善提案をお出しします。</p>
+        <span class="day">Day 2-3</span>
+      </div>
+      <div class="tl-step">
+        <div class="step-no">03</div>
+        <h3>制作・ローカライズ</h3>
+        <p>画像の日本語化、見出しデザイン、サムネイル・リターン画像まで一括制作します。</p>
+        <span class="day">Day 4-8</span>
+      </div>
+      <div class="tl-step">
+        <div class="step-no">04</div>
+        <h3>納品・継続化</h3>
+        <p>修正対応後に納品。品質・連携に問題なければ、次案件のご相談へ進みます。</p>
+        <span class="day">Day 9-10</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="meridian-bg"></div>
+  <div class="wrap">
+    <span class="lang-pill light" style="margin-bottom:22px;">KAIROS <span class="arrow">→</span> 聖様</span>
+    <h2>まずは1案件、テスト制作から<br>信頼関係を積み上げさせてください。</h2>
+    <p class="lead">
+      ポートフォリオ・制作実績のご提示、制作テストへの対応、いずれも対応可能です。
+      貴社の海外製品が日本の支援者に届く瞬間を、デザインの力で後押しします。
+    </p>
+    <a href="#" class="cta-btn">ご相談・お問い合わせ <span class="arrow">→</span></a>
+
+    <div class="closing-meta">
+      <div><b>33,000円〜</b>想定制作費用（税抜）</div>
+      <div><b>完全在宅</b>フルリモート対応</div>
+      <div><b>継続前提</b>長期パートナーシップ歓迎</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © Kairos — Web制作・システム開発チーム / Proposal for 合同会社聖
+</footer>
+
+</body>
+</html>
